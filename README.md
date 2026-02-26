@@ -1,15 +1,19 @@
-DockPanel Suite
-===============
+DockPanel Suite (MCS Fork)
+==========================
 
-[![Join the chat at https://gitter.im/dockpanelsuite/dockpanelsuite](https://img.shields.io/gitter/room/dockpanelsuite/dockpanelsuite.svg?style=flat-square)](https://gitter.im/dockpanelsuite/dockpanelsuite?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![NuGet Version](https://img.shields.io/nuget/v/DockPanelSuite.svg?style=flat-square)](https://www.nuget.org/packages/DockPanelSuite/)
-[![Build status](https://img.shields.io/appveyor/ci/lextm/dockpanelsuite/master.svg?label=appvejor&style=flat-square)](https://ci.appveyor.com/project/lextm/dockpanelsuite)
-[![Stories in Progress](https://img.shields.io/waffle/label/dockpanelsuite/dockpanelsuite/in%20progress.svg?style=flat-square)](http://waffle.io/dockpanelsuite/dockpanelsuite) 
+This is the [Promicron](https://www.promicron.de) fork of [DockPanelSuite](https://github.com/dockpanelsuite/dockpanelsuite), used in the MCS (Microscope Control Software) product.
 
-[![Throughput Graph](https://graphs.waffle.io/dockpanelsuite/dockpanelsuite/throughput.svg?style=flat-square)](https://waffle.io/dockpanelsuite/dockpanelsuite/metrics/throughput) 
+## Branch: `mcs/3.0.4`
 
-DockPanel Suite - The Visual Studio inspired docking library for .NET WinForms
+Based on upstream `Release_3.0.4` with the following fixes:
 
-For more details, check out [http://dockpanelsuite.com](http://dockpanelsuite.com).
+- **DockContentHandler**: Dispose `TabPageContextMenuStrip` to prevent memory leak; fix AutoHide pane activation when `ActiveAutoHideContent` is null; disable `bRestoreFocus` `Activate()` call that causes unwanted MDI child activation
+- **DockPanel.AutoHideWindow**: Add try/catch in `SetTimerMouseTrack` to prevent unhandled exceptions
+- **DockPanel**: Call `DockPanelTheme.CleanUp()` during disposal to release theme resources
+- **ThemeBase**: Prevent duplicate ToolStrip registration; subscribe to `Disposed` event to clean up `_stripBefore` dictionary
+- **VisualStudioToolStripExtender**: Subscribe to `ToolStrip.Disposed` to remove entries from strips dictionary
+- **VS2013SplitterControl**: Add try/catch in `OnPaint`; remove `Debug.Assert` for SplitterSize
 
-Visual Studio 2015 Community edition and above is recommended to compile the code base.
+## Upstream
+
+For the original project, see [dockpanelsuite/dockpanelsuite](https://github.com/dockpanelsuite/dockpanelsuite).
